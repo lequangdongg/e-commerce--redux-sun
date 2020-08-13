@@ -1,0 +1,2 @@
+export const FETCH_PRODUCT = 'FETCH_PRODUCT';
+export const SORT_PRODUCT ='SORT_PRODUCT';

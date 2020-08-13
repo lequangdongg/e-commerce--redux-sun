@@ -1,0 +1,7 @@
+export const FETCH_SHOW_RESULT = 'FETCH_SHOW_RESULT';
+export const CLICK_SHOW_RESULT = 'CLICK_SHOW_RESULT';
+export const CHECK_REFINE = 'CHECK_REFINE';
+export const CHECK_BRAND = 'CHECK_BRAND';
+export const CLICK_RATING = 'CLICK_RATING';
+export const SHOW_PRICE = 'SHOW_PRICE';
+export const CLICK_PRICE = 'CLICK_PRICE';
