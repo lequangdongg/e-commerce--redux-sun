@@ -265,6 +265,7 @@ const initialState = {
 const navBarReducer = (state = initialState, action) => {
   switch (action.type) {
     case CLICK_SHOW_RESULT:
+      console.log(action)
       return { ...state, result: action.result };
     case CHECK_REFINE:
       return { ...state, clickCheck: action.check };

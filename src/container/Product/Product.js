@@ -18,32 +18,52 @@ export default function Product() {
   const clickRating = useSelector((state) => state.navbar.clickRating);
   const clickPrice = useSelector((state) => state.navbar.clickPrice);
   const [curr, setCurr] = useState([]);
-  
   useEffect(() => {
     dispatch(fetchData(sort));
+    if (products.length <= 0) {
+      setCurr(products.slice(indexOfFrirstProduct, indexOfLastProducts));
+    }
   }, []);
-
   const indexOfLastProducts = currentPage * productPerPage;
   const indexOfFrirstProduct = indexOfLastProducts - productPerPage;
-  let currentProducts = products.slice(indexOfFrirstProduct, indexOfLastProducts);
-  if(title){  
-    currentProducts = title.slice(indexOfFrirstProduct, indexOfLastProducts);
-  }
-  if(resultShow){
-    currentProducts = resultShow.slice(indexOfFrirstProduct, indexOfLastProducts);
-  }
-  if(clickCheckBox){
-    currentProducts = clickCheckBox.slice(indexOfFrirstProduct, indexOfLastProducts);
-  }
-  if(clickCheckBrand){
-    currentProducts = clickCheckBrand.slice(indexOfFrirstProduct, indexOfLastProducts);
-  }
-  if(clickRating){
-    currentProducts = clickRating.slice(indexOfFrirstProduct, indexOfLastProducts);
-  }
-  if(clickPrice){
-    currentProducts = clickPrice.slice(indexOfFrirstProduct, indexOfLastProducts);
-  }
+  const productShow = products.slice(indexOfFrirstProduct, indexOfLastProducts);
+
+  useEffect(() => {
+    if (title) {
+      setCurr(title.slice(indexOfFrirstProduct, indexOfLastProducts));
+    }
+  }, [title]);
+
+  useEffect(() => {
+    if (resultShow) {
+      setCurr(resultShow.slice(indexOfFrirstProduct, indexOfLastProducts));
+    }
+  }, [resultShow]);
+
+  useEffect(() => {
+    if (clickCheckBox) {
+      setCurr(clickCheckBox.slice(indexOfFrirstProduct, indexOfLastProducts));
+    }
+  }, [clickCheckBox]);
+
+  useEffect(() => {
+    if (clickCheckBrand) {
+      setCurr(clickCheckBrand.slice(indexOfFrirstProduct, indexOfLastProducts));
+    }
+  }, [clickCheckBrand]);
+
+  useEffect(() => {
+    if (clickRating) {
+      setCurr(clickRating.slice(indexOfFrirstProduct, indexOfLastProducts));
+    }
+  }, [clickRating]);
+
+  useEffect(() => {
+    if (clickPrice) {
+      setCurr(clickPrice.slice(indexOfFrirstProduct, indexOfLastProducts));
+    }
+  }, [clickPrice]);
+
   const paginate = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
@@ -69,13 +89,19 @@ export default function Product() {
         length={products.length}
       />
       <div className="product__content">
-        {currentProducts.map((items) => (
+        {curr.length > 0 ? curr.map((items) => (
           <ProductItem
             key={items.id}
             products={items}
             showRating={showRating}
           />
-        ))}
+        )) : productShow.map((items) => (
+          <ProductItem
+            key={items.id}
+            products={items}
+            showRating={showRating}
+          />
+        )) }
       </div>
       <Pagination
         productPerPage={productPerPage}
